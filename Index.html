@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Mehak, Be My Valentine ❤️</title>
+
+  <style>
+    body {
+      background: linear-gradient(135deg, #ff758c, #ff7eb3);
+      font-family: Arial, sans-serif;
+      height: 100vh;
+      margin: 0;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      text-align: center;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.18);
+      padding: 40px;
+      border-radius: 25px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+      max-width: 520px;
+      z-index: 2;
+      backdrop-filter: blur(8px);
+    }
+
+    h1 { font-size: 2.5em; margin-bottom: 10px; }
+    p  { font-size: 1.15em; line-height: 1.6; margin-bottom: 25px; }
+    h2 { margin-bottom: 20px; }
+
+    .buttons {
+      position: relative;
+      height: 120px;
+    }
+
+    button {
+      font-size: 1.1em;
+      padding: 12px 30px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    #yes {
+      background: white;
+      color: #ff4d6d;
+      font-weight: bold;
+    }
+
+    #yes:hover { transform: scale(1.12); }
+
+    #no {
+      background: transparent;
+      color: white;
+      border: 2px solid white;
+      position: absolute;
+      left: 200px;
+      top: 0;
+    }
+
+    /* Floating hearts */
+    .heart {
+      position: absolute;
+      bottom: -50px;
+      font-size: 24px;
+      animation: floatUp linear infinite;
+      opacity: 0.8;
+    }
+
+    @keyframes floatUp {
+      from { transform: translateY(0) scale(1); opacity: 1; }
+      to   { transform: translateY(-110vh) scale(1.5); opacity: 0; }
+    }
+
+    /* Confetti */
+    .confetti {
+      position: fixed;
+      width: 10px;
+      height: 10px;
+      background: white;
+      top: -10px;
+      animation: fall linear forwards;
+      z-index: 3;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(110vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Background Music -->
+  <audio autoplay loop>
+    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_9f7c5dbb67.mp3" type="audio/mpeg">
+  </audio>
+
+  <div class="card">
+    <h1>Hey Mehak ❤️</h1>
+
+    <p>
+      This little page is powered by technology,<br>
+      courage… and a heart that still chooses you.<br><br>
+      No matter how complicated life gets,<br>
+      my favorite place is still right next to you.
+    </p>
+
+    <h2>Will you be my Valentine? 💖</h2>
+
+    <div class="buttons">
+      <button id="yes" onclick="yesClicked()">YES 💘</button>
+      <button id="no" onmouseover="moveNo()">NO 😅</button>
+    </div>
+  </div>
+
+  <script>
+    function moveNo() {
+      const noBtn = document.getElementById("no");
+      const x = Math.random() * 300 - 150;
+      const y = Math.random() * 80 - 40;
+      noBtn.style.transform = `translate(${x}px, ${y}px)`;
+    }
+
+    function yesClicked() {
+      launchConfetti();
+
+      document.body.innerHTML = `
+        <div style="
+          display:flex;
+          justify-content:center;
+          align-items:center;
+          height:100vh;
+          background:linear-gradient(135deg,#ff758c,#ff7eb3);
+          color:white;
+          text-align:center;
+          font-family:Arial;
+          padding:20px;">
+          <div>
+            <h1>You just made my heart smile, Mehak 💕</h1>
+            <p style="font-size:1.25em; line-height:1.6;">
+              Thank you for choosing us.<br>
+              I can’t wait to celebrate Valentine’s Day with you ❤️
+            </p>
+            <p style="margin-top:25px;">— Tushar 🌹</p>
+          </div>
+        </div>
+      `;
+    }
+
+    // Floating hearts
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.innerHTML = "💖";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = (4 + Math.random() * 4) + "s";
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 8000);
+    }
+    setInterval(createHeart, 500);
+
+    // Confetti burst
+    function launchConfetti() {
+      for (let i = 0; i < 120; i++) {
+        const confetti = document.createElement("div");
+        confetti.className = "confetti";
+        confetti.style.left = Math.random() * 100 + "vw";
+        confetti.style.background = `hsl(${Math.random() * 360}, 100%, 80%)`;
+        confetti.style.animationDuration = (2 + Math.random() * 3) + "s";
+        document.body.appendChild(confetti);
+        setTimeout(() => confetti.remove(), 5000);
+      }
+    }
+  </script>
+
+</body>
+</html>
